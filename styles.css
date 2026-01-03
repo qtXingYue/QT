@@ -672,4 +672,25 @@ body{
   );
   z-index: 2;
 }
+/* ===== FIX：首页文章封面图比例（防止图片被拉长） ===== */
+
+/* 封面容器：锁定比例 */
+.postCard .cover{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;   /* 推荐比例，电影感 */
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+/* 图片：铺满但不变形 */
+.postCard .cover img,
+.postCard .cover__img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* 核心：防拉伸 */
+  object-position: center;
+}
 
