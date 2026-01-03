@@ -2,6 +2,7 @@ const posts = [
   {
     id: "p1",
     title: "细读《你的名字。》：时间错位、结绳与命运感是怎么被“做出来”的",
+    cover: "assets/yourname_stairs.jpg",
     category: "动画",
     tags: ["你的名字", "新海诚", "深度解析"],
     date: "2026-01-03",
@@ -16,7 +17,8 @@ const posts = [
         <div class="sceneGrid">
           <div>
             <figure class="figure">
-              <img src="assets/yourname_stairs.jpg" alt="《你的名字。》阶梯相遇场景（请替换为你的截图）" onerror="this.style.display='none'; this.parentElement.querySelector('.figure__placeholder').style.display='grid';">
+              <img src="assets/yourname_stairs.jpg" alt="《你的名字。》阶梯相遇场景（请替换为你的截图）" onload="this.parentElement.querySelector('.figure__placeholder').style.display='none';"
+              onerror="this.style.display='none'; this.parentElement.querySelector('.figure__placeholder').style.display='grid';">
               <div class="figure__placeholder">把截图放到 <b>assets/yourname_stairs.jpg</b><br/>这里会自动显示</div>
             </figure>
             <div class="figcap">场景截图 01：阶梯相遇（建议用你自己截的高清图）。</div>
@@ -36,7 +38,8 @@ const posts = [
         <div class="sceneGrid">
           <div>
             <figure class="figure">
-              <img src="assets/yourname_twilight.jpg" alt="《你的名字。》黄昏之时（请替换为你的截图）" onerror="this.style.display='none'; this.parentElement.querySelector('.figure__placeholder').style.display='grid';">
+              <img src="assets/yourname_twilight.jpg" alt="《你的名字。》黄昏之时（请替换为你的截图）" onload="this.parentElement.querySelector('.figure__placeholder').style.display='none';"
+              onerror="this.style.display='none'; this.parentElement.querySelector('.figure__placeholder').style.display='grid';">
               <div class="figure__placeholder">把截图放到 <b>assets/yourname_twilight.jpg</b><br/>这里会自动显示</div>
             </figure>
             <div class="figcap">场景截图 02：黄昏之时（カタワレ時）——时间裂缝显形的瞬间。</div>
@@ -56,6 +59,7 @@ const posts = [
   {
     id: "p2",
     title: "《天气之子》：当爱情与世界站在两端，选择为何会刺痛？",
+    cover: "assets/weathering_cityrain.jpg",
     category: "动画",
     tags: ["天气之子", "新海诚", "主题分析"],
     date: "2026-01-02",
@@ -70,7 +74,8 @@ const posts = [
         <div class="sceneGrid">
           <div>
             <figure class="figure">
-              <img src="assets/weathering_cityrain.jpg" alt="《天气之子》城市雨景（请替换为你的截图）" onerror="this.style.display='none'; this.parentElement.querySelector('.figure__placeholder').style.display='grid';">
+              <img src="assets/weathering_cityrain.jpg" alt="《天气之子》城市雨景（请替换为你的截图）" onload="this.parentElement.querySelector('.figure__placeholder').style.display='none';"
+              onerror="this.style.display='none'; this.parentElement.querySelector('.figure__placeholder').style.display='grid';">
               <div class="figure__placeholder">把截图放到 <b>assets/weathering_cityrain.jpg</b><br/>这里会自动显示</div>
             </figure>
             <div class="figcap">场景截图：雨中的城市（建议截取霓虹反光与积水倒影）。</div>
@@ -93,6 +98,7 @@ const posts = [
   {
     id: "p3",
     title: "《铃芽之旅》：门、废墟与告别——一场关于创伤的公路仪式",
+    cover: "assets/suzume_door.jpg",
     category: "动画",
     tags: ["铃芽之旅", "新海诚", "创伤叙事"],
     date: "2025-12-31",
@@ -107,7 +113,8 @@ const posts = [
         <div class="sceneGrid">
           <div>
             <figure class="figure">
-              <img src="assets/suzume_door.jpg" alt="《铃芽之旅》门的场景（请替换为你的截图）" onerror="this.style.display='none'; this.parentElement.querySelector('.figure__placeholder').style.display='grid';">
+              <img src="assets/suzume_door.jpg" alt="《铃芽之旅》门的场景（请替换为你的截图）" onload="this.parentElement.querySelector('.figure__placeholder').style.display='none';"
+              onerror="this.style.display='none'; this.parentElement.querySelector('.figure__placeholder').style.display='grid';">
               <div class="figure__placeholder">把截图放到 <b>assets/suzume_door.jpg</b><br/>这里会自动显示</div>
             </figure>
             <div class="figcap">场景截图：门与废墟（建议选择“静止但有风”的镜头）。</div>
@@ -130,6 +137,7 @@ const posts = [
   {
     id: "p4",
     title: "新海诚色彩与天空配色指南：把“情绪时间”调进画面里",
+    cover: "assets/sky_palette_ref.jpg",
     category: "杂谈",
     tags: ["新海诚", "配色", "天空美学"],
     date: "2025-12-29",
@@ -146,7 +154,8 @@ const posts = [
         <div class="sceneGrid">
           <div>
             <figure class="figure">
-              <img src="assets/sky_palette_ref.jpg" alt="天空配色参考（请替换为你制作的色卡图）" onerror="this.style.display='none'; this.parentElement.querySelector('.figure__placeholder').style.display='grid';">
+              <img src="assets/sky_palette_ref.jpg" alt="天空配色参考（请替换为你制作的色卡图）" onload="this.parentElement.querySelector('.figure__placeholder').style.display='none';"
+              onerror="this.style.display='none'; this.parentElement.querySelector('.figure__placeholder').style.display='grid';">
               <div class="figure__placeholder">把色卡放到 <b>assets/sky_palette_ref.jpg</b><br/>这里会自动显示</div>
             </figure>
             <div class="figcap">建议：自己做一张色卡（截图取色 → 排成条带），视觉会更“专业”。</div>
@@ -223,7 +232,7 @@ function renderPosts(){
     el.className = "postCard";
     el.dataset.id = p.id;
     el.innerHTML = `
-      <div class="cover"><div class="cover__text">${makeCoverText(p)}</div></div>
+      <div class="cover">${p.cover ? `<img class="cover__img" src="${p.cover}" alt="${p.title}">` : ``}<div class="cover__text">${makeCoverText(p)}</div></div>
       <div class="postMain">
         <h3 class="postTitle">${p.title}</h3>
         <p class="postDesc">${p.excerpt}</p>
