@@ -490,7 +490,6 @@ body{
   .cover{ min-height: 120px; }
 }
 
-
 /* ===== 新海诚专题增强：时间轴 & 场景解析 ===== */
 .pageHeader{
   padding: 26px 0 6px;
@@ -620,46 +619,29 @@ body{
   color: var(--muted);
 }
 
-
-/* ===== 首页封面标签：强制贴左下角（覆盖旧样式） ===== */
+/* =========================================================
+   ✅ 最终修复：封面比例 & 标签位置（覆盖前面 min-height）
+   ========================================================= */
 .postCard .cover{
+  width: 100%;
+  aspect-ratio: 16 / 10;     /* 电影感比例 */
+  min-height: 0 !important;  /* 关键：压掉 96/120 的 min-height */
   position: relative;
   overflow: hidden;
+  border-radius: 18px;
 }
 
-/* 让文字永远在图片上，不占布局高度 */
-.postCard .cover .cover__text{
-  position: absolute !important;
-  left: 12px !important;
-  right: auto !important;
-  top: auto !important;
-  bottom: 10px !important;
-
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 6px 10px;
-  font-size: 12px;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: .2px;
-
-  color: rgba(255,255,255,.92);
-  background: rgba(0,0,0,.38);
-  border: 1px solid rgba(255,255,255,.10);
-  border-radius: 999px;
-  backdrop-filter: blur(8px);
-
-  z-index: 3 !important;
-  pointer-events: none;
-  max-width: calc(100% - 24px);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.postCard .cover .cover__img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* 关键：不拉伸 */
+  object-position: center;
+  z-index: 1;
 }
 
-/* 电影感暗角：只压底部，不挡主体 */
+/* 暗角在中间层 */
 .postCard .cover::after{
   content:"";
   position:absolute;
@@ -672,25 +654,18 @@ body{
   );
   z-index: 2;
 }
-/* ===== FIX：首页文章封面图比例（防止图片被拉长） ===== */
 
-/* 封面容器：锁定比例 */
-.postCard .cover{
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 10;   /* 推荐比例，电影感 */
+/* 标签永远左下角、永远在最上层 */
+.postCard .cover .cover__text{
+  position: absolute !important;
+  left: 12px !important;
+  bottom: 10px !important;
+  top: auto !important;
+  right: auto !important;
+
+  z-index: 3 !important;
+  max-width: calc(100% - 24px);
+  white-space: nowrap;
   overflow: hidden;
-  border-radius: 18px;
+  text-overflow: ellipsis;
 }
-
-/* 图片：铺满但不变形 */
-.postCard .cover img,
-.postCard .cover__img{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;      /* 核心：防拉伸 */
-  object-position: center;
-}
-
