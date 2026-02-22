@@ -330,7 +330,7 @@ function openPost(id){
 }
 function closePost(){ $("#postDialog").close(); }
 
-function setTheme(next){
+function applyTheme(next){
   state.theme = next;
   document.documentElement.dataset.theme = next;
   localStorage.setItem("theme", next);
@@ -342,6 +342,29 @@ function setTheme(next){
     btn.querySelector(".btn__icon").textContent = "☾";
     btn.querySelector(".btn__text").textContent = "暗色";
   }
+}
+
+function setTheme(next, e){
+  if(!document.startViewTransition || !e){
+    applyTheme(next);
+    return;
+  }
+  const x = e.clientX;
+  const y = e.clientY;
+  const endRadius = Math.hypot(
+    Math.max(x, innerWidth - x),
+    Math.max(y, innerHeight - y)
+  );
+  const transition = document.startViewTransition(()=> applyTheme(next));
+  transition.ready.then(()=>{
+    document.documentElement.animate(
+      { clipPath: [
+          `circle(0px at ${x}px ${y}px)`,
+          `circle(${endRadius}px at ${x}px ${y}px)`
+        ]},
+      { duration: 500, easing: "ease-in-out", pseudoElement: "::view-transition-new(root)" }
+    );
+  });
 }
 
 function bind(){
@@ -379,8 +402,8 @@ function bind(){
     hint.style.color = "var(--a2)";
     e.target.reset();
   });
-  $("#themeBtn").addEventListener("click", ()=>{
-    setTheme(state.theme === "dark" ? "light" : "dark");
+  $("#themeBtn").addEventListener("click", (e)=>{
+    setTheme(state.theme === "dark" ? "light" : "dark", e);
   });
 }
 
