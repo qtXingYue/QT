@@ -6,6 +6,12 @@
   <title>新海诚时间轴｜专题</title>
   <meta name="description" content="按作品年代梳理新海诚导演作品的主题与风格演变" />
   <link rel="stylesheet" href="./styles.css" />
+  <script>
+    (function(){
+      var t = localStorage.getItem("theme") || "dark";
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
 </head>
 
 <body>
@@ -32,6 +38,10 @@
       </nav>
 
       <div class="actions">
+        <button id="themeBtn" class="btn btn--ghost" type="button" title="切换主题">
+          <span class="btn__icon">☾</span>
+          <span class="btn__text">暗色</span>
+        </button>
         <a class="btn btn--ghost" href="./index.html">返回首页</a>
       </div>
     </div>
@@ -134,6 +144,34 @@
 
   <script>
     document.getElementById("year").textContent = String(new Date().getFullYear());
+
+    // 主题切换
+    function applyTheme(t){
+      document.documentElement.dataset.theme = t;
+      localStorage.setItem("theme", t);
+      var btn = document.getElementById("themeBtn");
+      btn.querySelector(".btn__icon").textContent = t === "light" ? "☀" : "☾";
+      btn.querySelector(".btn__text").textContent = t === "light" ? "亮色" : "暗色";
+    }
+    var current = localStorage.getItem("theme") || "dark";
+    applyTheme(current);
+    document.getElementById("themeBtn").addEventListener("click", function(){
+      applyTheme(current === "dark" ? "light" : "dark");
+      current = localStorage.getItem("theme");
+    });
+
+    // 回到顶部
+    var topBtn = document.createElement("button");
+    topBtn.className = "scrollTopBtn";
+    topBtn.title = "回到顶部";
+    topBtn.innerHTML = "↑";
+    document.body.appendChild(topBtn);
+    window.addEventListener("scroll", function(){
+      topBtn.classList.toggle("is-visible", window.scrollY > 320);
+    });
+    topBtn.addEventListener("click", function(){
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   </script>
 </body>
 </html>

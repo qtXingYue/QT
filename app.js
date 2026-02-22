@@ -1,5 +1,33 @@
 const posts = [
   {
+    id: "p5",
+    title: "《言叶之庭》：雨、庭园与“恰好够近”的亲密距离",
+    cover: "assets/kotonoha_garden.jpg",
+    category: "动画",
+    tags: ["言叶之庭", "新海诚", "情感解析"],
+    date: "2026-02-10",
+    readTime: "10 min",
+    hot: false,
+    excerpt: "新海诚把两个人的世界缩到最小：一座庭园、一场雨、一段够长又够短的距离。",
+    content: `
+      <h3>一、雨：把"日常借口"变成结构</h3>
+      <p>两个主角只在下雨天相遇——雨不是背景，而是叙事装置：它给两人提供了"理由"，又用季节终结来切断这个理由。</p>
+      <p>雨声的细节混音值得反复听：远处水滴、近处叶面、伞面弹击，三层叠合，营造出一种"只有我们两个人的世界"的错觉。</p>
+
+      <h3>二、庭园尺度：亲密感的物理设计</h3>
+      <p>故事发生在一座面积极小的日式庭园。新海诚用景深镜头让庭园"更深"，又用特写压缩距离——你能感受到两人之间的空气被精确测量过。</p>
+      <p class="note">写作提示：用"空间感"写情绪。把场景做小，情感就会被放大。</p>
+
+      <h3>三、万叶集的功能：语言与感情的时差</h3>
+      <p>孝雄用古典诗引出话题，雪野回应……两人通过古诗建立的连接，本质上是一种"感情的迂回"：直接说出口太困难，借古人的话反而安全。</p>
+      <p>这种"语言时差"是新海诚的惯用技巧：情感永远比语言慢半拍，但那半拍正是观众想看的东西。</p>
+
+      <h3>四、结局的"刺"：拥抱与离别同时发生</h3>
+      <p>雪野的泪水、孝雄的哭泣与拥抱，是全片最密集的情绪时刻——但没有解决任何问题。新海诚让"靠近"与"分离"几乎在同一秒发生，这就是他的结构诚实：靠近从来不等于留下。</p>
+    `
+  },
+
+  {
     id: "p1",
     title: "细读《你的名字。》：时间错位、结绳与命运感是怎么被“做出来”的",
     cover: "assets/yourname_stairs.jpg",
@@ -232,7 +260,7 @@ function renderPosts(){
     el.className = "postCard";
     el.dataset.id = p.id;
     el.innerHTML = `
-      <div class="cover">${p.cover ? `<img class="cover__img" src="${p.cover}" alt="${p.title}">` : ``}<div class="cover__text">${makeCoverText(p)}</div></div>
+      <div class="cover">${p.cover ? `<img class="cover__img" src="${p.cover}" alt="${p.title}" onerror="this.style.display='none'">` : ``}<div class="cover__text">${makeCoverText(p)}</div></div>
       <div class="postMain">
         <h3 class="postTitle">${p.title}</h3>
         <p class="postDesc">${p.excerpt}</p>
@@ -346,6 +374,9 @@ function bind(){
     toast.innerHTML = "<span>✨</span> 已订阅（演示）！";
     document.body.appendChild(toast);
     setTimeout(()=>toast.remove(), 2500);
+    const hint = $("#subHint");
+    hint.textContent = "✅ 已记录，感谢订阅！";
+    hint.style.color = "var(--a2)";
     e.target.reset();
   });
   $("#themeBtn").addEventListener("click", ()=>{
@@ -358,6 +389,20 @@ function dailyPick(){
   $("#dailyPick").textContent = `《${pick.title}》— ${pick.excerpt}`;
 }
 
+function initScrollTop(){
+  const btn = document.createElement("button");
+  btn.className = "scrollTopBtn";
+  btn.title = "回到顶部";
+  btn.innerHTML = "↑";
+  document.body.appendChild(btn);
+  window.addEventListener("scroll", ()=>{
+    btn.classList.toggle("is-visible", window.scrollY > 320);
+  });
+  btn.addEventListener("click", ()=>{
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
 function init(){
   setTheme(state.theme);
   renderStats();
@@ -367,5 +412,6 @@ function init(){
   dailyPick();
   $("#year").textContent = String(new Date().getFullYear());
   bind();
+  initScrollTop();
 }
 init();
